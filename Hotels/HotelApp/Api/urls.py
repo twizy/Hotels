@@ -46,4 +46,13 @@ urlpatterns = [
     path('hotel-details/<str:pk>/', ApiHotelsDetails, name="hotel-details"),
     path('hotel-update/<str:pk>/', ApiHotelsUpdate, name="hotel-update"),
     path('hotel-delete/<str:pk>/', ApiHotelsDelete, name="hotel-delete"),
+
+    # Room Types Api Urls
+    path('room-type-list/', ApiRoomTypeList, name="room-type-list"),
+    # path('room-type-create/', ApiRoomTypesCreate, name="room-type-create"),
+    # path('room-type-details/<str:pk>/', ApiRoomTypesDetails, name="room-type-details"),
+    # path('room-type-update/<str:pk>/', ApiRoomTypesUpdate, name="room-type-update"),
+    # path('room-type-delete/<str:pk>/', ApiRoomTypesDelete, name="room-type-delete"),
+
+
 ]
