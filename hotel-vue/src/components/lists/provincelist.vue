@@ -15,7 +15,9 @@
                         <a class="btn btn-danger" @click.prevent="deleteProvince(i.id)">Delete</a>
                     </td>
                     <td>
-                        <a class="btn btn-secondary">Update</a>
+                        <a class="btn btn-secondary" @click.prevent="updateProvince(i.id)">
+                            <router-link to="update-province">Update</router-link>
+                        </a>
                     </td>
                 </tr>
             </tbody>
@@ -25,11 +27,12 @@
 
 <script>
 import axios from 'axios';
+import { EventBus } from '../../event-bus.js';
 
 export default {
     
     methods:{
-        getProvince(){
+        getProvinceList(){
             axios.get('http://localhost:8000/api/hotel/province-list/')
             .then(res=>{
                 this.$store.state.allProvinces = res.data
@@ -46,12 +49,14 @@ export default {
             .catch(erro=>{
                 console.log(error)
             })
-            
-            
+        },
+        updateProvince(id){
+            EventBus.$emit('updateValue', id)
+            console.log(id)
         }
         
     },created(){
-        this.getProvince()
+        this.getProvinceList()
     }
 }
 </script>

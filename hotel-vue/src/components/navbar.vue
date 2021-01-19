@@ -32,12 +32,27 @@
                     <li class="nav-item">
                         <router-link to="/reservation">Reservations</router-link>
                     </li>
-
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                </form>
+
+                <app-search></app-search>
+                
             </div>
         </div>
     </nav>
 </template>
+
+
+<script>
+
+import search from './search.vue';
+
+export default {
+    components:{
+        'app-search':search
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

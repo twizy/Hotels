@@ -18,7 +18,7 @@ export const store = new Vuex.Store({
             quarter: ''
         },
         hotState: {
-            name: '',
+            hotel: '',
             province: '',
             photo_outside: null,
             photo_inside: null,
@@ -31,9 +31,18 @@ export const store = new Vuex.Store({
             room_number: '',
             price: 0
         },
+        homState: {
+            search:''
+        },
+        fullDetailState:{
+            gotId:'',
+            hotel:'',
+            province:'',
+            date:''
+        },
 
         allProvinces: [],
-        allHotelRooms: ['Room type', 'Single occupation', 'Double occupation', 'Both occupation'],
+        allHotelRooms: ['Single occupation', 'Double occupation', 'Both occupation'],
         allRooms: [],
         allStates: [],
         allQuarters: [],

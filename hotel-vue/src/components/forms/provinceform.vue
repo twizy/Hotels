@@ -3,8 +3,14 @@
     <div class="mb-3 mx-2">
         <form action="">
             <input type="text" class="form-control" name="pro" v-model="$store.state.proState.province" placeholder="Province"> <br>
-            <button class="btn btn-outline-primary" @click.prevent="addProvince">Add province</button>
+            <button class="btn btn-outline-primary" @click.prevent="addProvince">
+                Add province
+            </button>
+
         </form>
+
+        
+
     </div>
 
 </template>
@@ -20,15 +26,30 @@ export default {
                 province:this.$store.state.proState.province
             }
 
-            console.log(myForm)
+            var checkExitingObject = this.$store.state.allProvinces.filter(function (elm){
+                if (elm.province.toLowerCase() == myForm.province.toLowerCase())
+                {
+                return elm; // returns length = 1 (object exists in array)
+                }
+            });
 
-            axios.post('http://localhost:8000/api/hotel/province-create/',myForm)
-            .then(res=>{
-                this.getProvince()
-            })
-            .catch(error=>console.error(error))
-            .finally(this.$store.state.proState.province = "")
-            
+            if(checkExitingObject.length == 0){
+
+                axios.post('http://localhost:8000/api/hotel/province-create/',myForm)
+                .then(res=>{
+                    this.getProvince()
+                })
+                .catch(error=>console.error(error))
+                .finally(this.$store.state.proState.province = "")
+
+            }
+            else if(checkExitingObject.length == 1){
+                console.log("Province exists")
+            }
+            else{
+               console.log("Sorry put valid input") 
+            }
+
         },
         getProvince(){
             axios.get('http://localhost:8000/api/hotel/province-list/')

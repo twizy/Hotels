@@ -24,17 +24,33 @@ export default {
                 quarter:this.$store.state.quaState.quarter
             }
 
-            console.log(myForm)
+            var checkExitingObject = this.$store.state.allQuarters.filter(function (elm){
+                if (elm.state.toLowerCase() == myForm.state.toLowerCase() && 
+                elm.quarter.toLowerCase() == myForm.quarter.toLowerCase())
+                {
+                    return elm; // returns length = 1 (object exists in array)
+                }
+            });
+
+            if(checkExitingObject.length == 0){
 
             axios.post('http://localhost:8000/api/hotel/quarter-create/',myForm)
-            .then(res=>{
-                this.getQuarter()
-            })
-            .catch(error=>console.error(error))
-            .finally(
-                this.$store.state.quaState.state = "",
-                this.$store.state.quaState.quarter = "")
-            
+                .then(res=>{
+                    this.getQuarter()
+                })
+                .catch(error=>console.error(error))
+                .finally(
+                    this.$store.state.quaState.state = "",
+                    this.$store.state.quaState.quarter = "")
+
+            }
+            else if(checkExitingObject.length == 1){
+                console.log("Quarter exists in that State")
+            }
+            else{
+               console.log("Sorry put valid input") 
+            }
+ 
         },
         getQuarter(){
             axios.get('http://localhost:8000/api/hotel/quarter-list/')

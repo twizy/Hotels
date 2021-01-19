@@ -24,16 +24,32 @@ export default {
                 province:this.$store.state.staState.province
             }
 
-            console.log(myForm)
+            var checkExitingObject = this.$store.state.allStates.filter(function (elm){
+                if (elm.state.toLowerCase() == myForm.state.toLowerCase() && 
+                elm.province.toLowerCase() == myForm.province.toLowerCase())
+                {
+                    return elm; // returns length = 1 (object exists in array)
+                }
+            });
 
-            axios.post('http://localhost:8000/api/hotel/state-create/',myForm)
-            .then(res=>{
-                this.getState()
-            })
-            .catch(error=>console.error(error))
-            .finally(
-                this.$store.state.staState.state = "",
-                this.$store.state.staState.province = "")
+            if(checkExitingObject.length == 0){
+
+                axios.post('http://localhost:8000/api/hotel/state-create/',myForm)
+                .then(res=>{
+                    this.getState()
+                })
+                .catch(error=>console.error(error))
+                .finally(
+                    this.$store.state.staState.state = "",
+                    this.$store.state.staState.province = "")
+
+            }
+            else if(checkExitingObject.length == 1){
+                console.log("State exists in that Province")
+            }
+            else{
+               console.log("Sorry put valid input") 
+            }
             
         },
         getState(){

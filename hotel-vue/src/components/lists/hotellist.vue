@@ -10,7 +10,7 @@
 
             <tbody>
                 <tr :key="i.id" v-for="i in $store.state.allHotels">
-                    <td>{{i.name}} - {{i.province}}</td>
+                    <td>{{i.hotel}} - {{i.province}}</td>
                     <td>
                         <a class="btn btn-danger" @click.prevent="deleteHotel(i.id)">Delete</a>
                     </td>
@@ -47,11 +47,9 @@ export default {
             .catch(erro=>{
                 console.log(error)
             })
-            
-            
         }
-        
-    },created(){
+    },
+    created(){
         this.getHotel()
     }
 }

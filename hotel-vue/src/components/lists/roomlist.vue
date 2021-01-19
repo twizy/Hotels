@@ -10,7 +10,7 @@
 
             <tbody>
                 <tr :key="i.id" v-for="i in $store.state.allRooms">
-                    <td>{{i.hotel}} <br> Type {{i.room}} <br> Room no {{i.room_number}} for {{i.price}} FBU</td>
+                    <td>{{i.hotel}} <br> Type : {{i.room}} <br> Room no {{i.room_number}} for {{i.price}} FBU (1 day)</td>
                     <td>
                         <a class="btn btn-danger" @click.prevent="deleteRoom(i.id)">Delete</a>
                     </td>
