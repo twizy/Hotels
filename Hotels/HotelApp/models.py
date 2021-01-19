@@ -51,18 +51,18 @@ class Quarters(models.Model):
         return f"{self.quarter}"
 
 class Hotels(models.Model):
-    name = models.CharField(max_length=64)
+    hotel = models.CharField(max_length=64)
     province = models.ForeignKey(Provinces, related_name='provinc', on_delete=models.CASCADE)
-    photo_outside = models.ImageField(upload_to='Images/hotels/', null=True, blank=True)
-    photo_inside = models.ImageField(upload_to='Images/hotels/', null=True, blank=True)
-    photo_room = models.ImageField(upload_to='Images/hotels/', null=True, blank=True)
+    photo_outside = models.ImageField(upload_to='Images/hotels/%Y/%m/%d/', null=True, blank=True)
+    photo_inside = models.ImageField(upload_to='Images/hotels/%Y/%m/%d/', null=True, blank=True)
+    photo_room = models.ImageField(upload_to='Images/hotels/%Y/%m/%d/', null=True, blank=True)
     date = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.hotel}"
 
 class Rooms(models.Model):
-    hotel = models.ForeignKey(Hotels,related_name='hotel',on_delete=models.CASCADE)
+    hotel = models.ForeignKey(Hotels,related_name='room_hotel',on_delete=models.CASCADE)
     room = models.ForeignKey(RoomType,related_name='room_type',on_delete=models.CASCADE)
     room_number = models.IntegerField()
     price = models.IntegerField()
