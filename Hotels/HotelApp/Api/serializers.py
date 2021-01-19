@@ -114,6 +114,7 @@ class ApiHotelSerializer(serializers.ModelSerializer):
 class ApiRoomSerializer(serializers.ModelSerializer):
     hotel = serializers.CharField()
     room = serializers.CharField()
+    photo_room = serializers.ImageField()
 
     class Meta:
         model = Rooms
@@ -122,9 +123,10 @@ class ApiRoomSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         hotel_data = validated_data.pop('hotel')
         room_type_data = validated_data.pop('room')
+        photo_room_data = validated_data["photo_room"]
         hotel_new_data_instance, created = Hotels.objects.get_or_create(hotel=hotel_data)
         room_new_data_instance, created = RoomType.objects.get_or_create(room=room_type_data)
-        room_data = Rooms.objects.create(**validated_data, hotel=hotel_new_data_instance,room=room_new_data_instance)
+        room_data = Rooms.objects.create(**validated_data, hotel=hotel_new_data_instance,room=room_new_data_instance,photo_room=photo_room_data)
         return room_data
 
     def update(self, instance, validated_data):
